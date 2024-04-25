@@ -1,0 +1,35 @@
+CREATE TABLE user (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE properties (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    price DECIMAL(10, 2),
+    address VARCHAR(255),
+    beds INT,
+    baths DECIMAL(5, 1),
+    sqft INT,
+    image_path VARCHAR(255)
+);
+
+INSERT INTO properties (name, price, address, beds, baths, sqft, image_path) 
+VALUES 
+('Phineas', 500000.00, '2308 Maple Drive', 3, 2, 1800, 'images/Phineas/Phineas1.jpeg'),
+('Spongebob', 400000.00, '124 Conch Street', 2, 1.5, 1500, 'images/Spongebob/Spongebob1.jpeg'),
+('Simpsons', 600000.00, '742 Evergreen Terrace', 4, 3, 2500, 'images/Simpsons/Simpsons1.jpeg'),
+('FamilyGuy', 550000.00, '101 Spooner St', 3, 2.5, 2000, 'images/Familyguy/Familyguy1.jpeg');
+
+CREATE TABLE wishlist (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    username VARCHAR(50),
+    property_id INT,
+    property_name VARCHAR(100),
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (property_id) REFERENCES properties(id)
+);
